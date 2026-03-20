@@ -31,11 +31,12 @@ const Hero = () => {
         <div ref={titleRef} style={{ filter: 'url(#noise)' }}>
           <MagneticTitle 
             text="Estefany Ladino" 
-            className="justify-center text-5xl md:text-7xl lg:text-8xl font-serif text-dark tracking-tight leading-none mb-4 pointer-events-auto"
-            vivid={true} 
+            className="justify-center text-7xl md:text-9xl lg:text-[10rem] font-serif text-dark tracking-tighter leading-[0.85] mb-4 pointer-events-auto"
+            vivid={true}
+            persistent={false}
           />
         </div>
-        <p ref={subtitleRef} className="text-xl md:text-2xl font-sans font-medium tracking-widest uppercase text-dark/60 mt-4">
+        <p ref={subtitleRef} className="text-xl md:text-3xl font-sans font-medium tracking-widest uppercase text-dark/40 mt-6 md:mt-10">
           Arquitecta
         </p>
       </div>

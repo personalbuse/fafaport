@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400&family=Syne:wght@400;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -16,6 +16,10 @@
   h5,
   h6 {
     @apply font-serif font-normal tracking-tight;
+  }
+
+  .font-syne {
+    font-family: 'Syne', sans-serif;
   }
 }
 
@@ -64,21 +68,21 @@ html {
   rotate: 1deg;
   scale: 1.1;
   transform: skew(-5deg);
-  --mark-color: 255 232 62;
+  --mark-color: 255 210 20;
   --mark-bg-angle: 50deg;
 }
 
 .marker-green::before {
   scale: 0.92;
   transform: skew(7deg);
-  --mark-color: 91 233 92;
+  --mark-color: 40 220 120;
   --mark-bg-angle: 30deg;
 }
 
 .marker-red::before {
   rotate: 0.5deg;
   transform: skew(5deg);
-  --mark-color: 255 100 185;
+  --mark-color: 255 80 150;
   --mark-bg-angle: 150deg;
 }
 
@@ -86,8 +90,17 @@ html {
   rotate: -1deg;
   scale: 1.05;
   transform: skew(3deg);
-  --mark-color: 100 200 255;
+  --mark-color: 60 170 255;
   --mark-bg-angle: 110deg;
+}
+
+.marker-title::before {
+  rotate: -0.5deg;
+  scale: 1.1;
+  transform: skew(-2deg);
+  --mark-color: 139 174 102; /* Match the nature green */
+  --mark-bg-angle: 15deg;
+  opacity: 0.8;
 }
 
 /* Palm Shadow Animations */

@@ -440,6 +440,7 @@ export default function ProjectSlider() {
       <section className="slider" ref={containerRef}>
         <div className="slider__header">
           <span className="slider__label">PROYECTOS VARIOS</span>
+          <span className="slider__hint">Para moverse entre imagenes usa el raton o desliza tu pantalla</span>
         </div>
 
         <div className="slider__body">

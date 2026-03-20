@@ -10,15 +10,22 @@ const VIVID_COLORS = [
   '#87CEFA', // Light Sky Blue
 ];
 
-const MagneticTitle = ({ text, className = "", vivid = false }) => {
+const MagneticTitle = ({ text, className = "", vivid = false, colors = null, persistent = true }) => {
   const containerRef = useRef(null);
+  const palette = colors || VIVID_COLORS;
 
   useEffect(() => {
     const letters = containerRef.current.querySelectorAll('.magnetic-letter');
     
-    if (vivid) {
+    if (vivid && persistent) {
       letters.forEach(el => {
-        el.dataset.color = VIVID_COLORS[Math.floor(Math.random() * VIVID_COLORS.length)];
+        const color = palette[Math.floor(Math.random() * palette.length)];
+        el.dataset.color = color;
+        el.style.color = color;
+      });
+    } else if (vivid && !persistent) {
+      letters.forEach(el => {
+        el.dataset.color = palette[Math.floor(Math.random() * palette.length)];
       });
     }
 
@@ -41,12 +48,17 @@ const MagneticTitle = ({ text, className = "", vivid = false }) => {
             el.style.color = el.dataset.color;
             el.style.textShadow = `0 4px 12px ${el.dataset.color}80`;
           } else {
-            el.style.color = '#3C523B'; 
+            el.style.color = '#1A1A1A'; 
           }
         } else {
           el.style.transform = '';
-          el.style.color = '';
-          el.style.textShadow = '';
+          if (vivid && persistent) {
+            el.style.color = el.dataset.color;
+            el.style.textShadow = '';
+          } else {
+            el.style.color = '';
+            el.style.textShadow = '';
+          }
         }
       });
     };
