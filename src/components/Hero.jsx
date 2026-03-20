@@ -3,29 +3,35 @@ import gsap from 'gsap';
 import MagneticTitle from './MagneticTitle';
 import PalmShadow from './PalmShadow';
 
+import FloorPlan from './FloorPlan';
+
 const Hero = () => {
+  const containerRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    tl.fromTo(
-      titleRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 0.9, duration: 1, ease: 'power3.out', delay: 0.2 }
-    )
-    .fromTo(
-      subtitleRef.current,
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-      '-=0.5'
-    );
+    const ctx = gsap.context(() => {
+      // Noise animation
+      gsap.to('#noise feTurbulence', {
+        attr: { baseFrequency: 0.8 },
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'none'
+      });
+    }, containerRef);
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-20">
-      {/* Animated Palm Shadow Overlay */}
-      <PalmShadow className="absolute top-[-5%] left-[-15%] md:top-[-10%] md:left-[5%] w-[450px] md:w-[700px] h-auto pointer-events-none z-20" />
+    <section 
+      ref={containerRef}
+      className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-cream"
+    >
+      <FloorPlan />
+      
+      <PalmShadow className="absolute -top-10 -left-10 md:left-[5%] md:top-[-5%] w-[600px] h-[600px] opacity-30 pointer-events-none z-0" />
 
       <div className="z-10 text-center mb-12 pointer-events-none">
         <div ref={titleRef} style={{ filter: 'url(#noise)' }}>
