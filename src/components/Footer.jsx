@@ -8,18 +8,6 @@ const Footer = () => {
         <p className="text-sm font-sans text-cream/60 tracking-wider">ARQUITECTA.</p>
       </div>
 
-      <div className="flex gap-6 text-sm font-sans tracking-wide uppercase">
-        <a href="mailto:contacto@estefanyladino.com" className="hover:text-paleGreen transition-colors duration-300">
-          Email
-        </a>
-        <a href="#" className="hover:text-paleGreen transition-colors duration-300">
-          Instagram
-        </a>
-        <a href="#" className="hover:text-paleGreen transition-colors duration-300">
-          LinkedIn
-        </a>
-      </div>
-
       <div className="text-xs text-cream/40 text-center md:text-right font-sans">
         &copy; {new Date().getFullYear()} Estefany Ladino.<br />
         Todos los derechos reservados.

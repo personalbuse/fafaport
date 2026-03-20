@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import MagneticTitle from './MagneticTitle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,21 +38,26 @@ const Process = () => {
     return () => ctx.revert();
   }, []);
 
+  const processColors = ['marker-yellow', 'marker-blue', 'marker-red', 'marker-green'];
+
   return (
     <section ref={processRef} className="w-full px-6 py-24 bg-paleGreen text-dark">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-serif mb-16 md:mb-20 text-center md:text-left">
-          Proceso de Diseño
-        </h2>
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
+        <MagneticTitle 
+          text="Proceso de Diseño" 
+          className="justify-center w-full mb-20 md:mb-24 text-5xl md:text-6xl lg:text-7xl font-serif text-dark drop-shadow-md text-center"
+        />
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 w-full mt-4">
           {processSteps.map((item, idx) => (
             <div key={idx} className="process-step flex flex-col items-center md:items-start text-center md:text-left">
-              <span className="text-xl font-serif text-dark/30 mb-4 block border-b border-dark/20 w-full pb-2 md:w-auto md:border-none">
+              <span className="text-xl font-serif text-dark/30 mb-5 block border-b border-dark/20 w-full pb-2 md:w-auto md:border-none">
                 {item.step}
               </span>
-              <h4 className="text-2xl font-serif mb-3">{item.title}</h4>
-              <p className="text-dark/70 font-sans leading-relaxed text-sm md:text-base max-w-xs">
+              <div className={`marker-text text-3xl font-serif font-semibold text-dark mb-4 ${processColors[idx]}`}>
+                {item.title}
+              </div>
+              <p className="text-dark/70 font-sans leading-relaxed text-sm md:text-base max-w-xs mt-1">
                 {item.text}
               </p>
             </div>

@@ -33,12 +33,6 @@ const debounce = (func, wait, immediate) => {
 
 const SLIDES = [
   {
-    name: "Casa Llum",
-    color: "#6B5B50",
-    image:
-      "https://images.unsplash.com/photo-1613490908578-87b415e98547?w=800&q=80"
-  },
-  {
     name: "Pabellón",
     color: "#B8B5A4",
     image:
