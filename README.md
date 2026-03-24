@@ -1,4 +1,4 @@
-# Estefany Ladino - Portafolio de Arquitectura
+Portafolio de Arquitectura
 
 Este proyecto es un portafolio web minimalista y elegante para la arquitecta Estefany Ladino. Está diseñado con un enfoque visual en la transición entre planos técnicos (estilo AutoCAD) y resultados finales (renders). Todo el sitio respira una estética "Midsommar": tonos crema, blancos, verdes pálidos, con un contraste sutil y tipografías muy limpias.
 
