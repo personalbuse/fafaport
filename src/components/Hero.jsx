@@ -1,50 +1,31 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
+import React from 'react';
 import MagneticTitle from './MagneticTitle';
-import PalmShadow from './PalmShadow';
-
-import FloorPlan from './FloorPlan';
 
 const Hero = () => {
-  const containerRef = useRef(null);
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Noise animation
-      gsap.to('#noise feTurbulence', {
-        attr: { baseFrequency: 0.8 },
-        duration: 2,
-        repeat: -1,
-        yoyo: true,
-        ease: 'none'
-      });
-    }, containerRef);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section 
-      ref={containerRef}
       className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-cream"
+      aria-label="Portafolio de Estefany Ladino - Arquitecta"
     >
-      <FloorPlan />
-      
-      <PalmShadow className="absolute -top-10 -left-10 md:left-[5%] md:top-[-5%] w-[600px] h-[600px] opacity-30 pointer-events-none z-0" />
-
-      <div className="z-10 text-center mb-12 pointer-events-none">
-        <div ref={titleRef} style={{ filter: 'url(#noise)' }}>
+      <div className="text-center mb-12 pointer-events-none">
+        <div className="title-animated">
           <MagneticTitle 
             text="Estefany Ladino" 
-            className="justify-center text-7xl md:text-9xl lg:text-[10rem] font-serif text-dark tracking-tighter leading-[0.85] mb-4 pointer-events-auto"
+            className="justify-center text-[6rem] sm:text-[7.2rem] md:text-[9.6rem] lg:text-[12rem] xl:text-[14.4rem] font-serif text-dark tracking-tight leading-[0.85] mb-4 pointer-events-auto"
             vivid={true}
             persistent={false}
           />
         </div>
-        <p ref={subtitleRef} className="text-xl md:text-3xl font-sans font-medium tracking-widest uppercase text-dark/40 mt-6 md:mt-10">
+        <p className="text-xl md:text-2.5xl font-sans font-medium tracking-[0.2em] uppercase text-dark/40 mt-6 md:mt-10">
           Arquitecta
         </p>
+      </div>
+      
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div className="flex flex-col items-center gap-2 text-dark/30" aria-hidden="true">
+          <span className="text-xs uppercase tracking-[0.2em]">Scroll</span>
+          <div className="w-px h-12 bg-gradient-to-b from-dark/40 to-transparent" />
+        </div>
       </div>
     </section>
   );

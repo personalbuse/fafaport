@@ -164,3 +164,46 @@ html {
     transform: rotate(0deg);
   }
 }
+
+/* Morph Letter Animation */
+.morph-letter {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.morph-letter .char,
+.morph-letter .house {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: opacity;
+}
+
+/* Title Animation - Sutil latido con movimiento */
+.title-animated {
+  animation: subtlePulseMove 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+.title-animated.paused {
+  animation-play-state: paused;
+}
+
+@keyframes subtlePulseMove {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  25% {
+    transform: scale(1.015) translateY(-1px);
+  }
+  50% {
+    transform: scale(1) translateY(0);
+  }
+  75% {
+    transform: scale(1.015) translateY(1px);
+  }
+}
