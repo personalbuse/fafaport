@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="title-animated">
           <MagneticTitle 
             text="Estefany Ladino" 
-            className="justify-center text-[6rem] sm:text-[7.2rem] md:text-[9.6rem] lg:text-[12rem] xl:text-[14.4rem] font-serif text-dark tracking-tight leading-[0.85] mb-4 pointer-events-auto"
+            className="justify-center text-[3.51rem] sm:text-[4.225rem] md:text-[5.525rem] lg:text-[7.02rem] xl:text-[8.424rem] font-sans text-dark uppercase tracking-[0.15em] leading-[0.85] mb-4 pointer-events-auto"
             vivid={true}
             persistent={false}
           />

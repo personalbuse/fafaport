@@ -185,8 +185,9 @@ html {
 
 /* Title Animation - Sutil latido con movimiento */
 .title-animated {
-  animation: subtlePulseMove 3s ease-in-out infinite;
+  animation: subtlePulseMove 6s ease-in-out infinite;
   display: inline-block;
+  position: relative;
 }
 
 .title-animated.paused {
@@ -197,13 +198,7 @@ html {
   0%, 100% {
     transform: scale(1) translateY(0);
   }
-  25% {
-    transform: scale(1.015) translateY(-1px);
-  }
   50% {
-    transform: scale(1) translateY(0);
-  }
-  75% {
-    transform: scale(1.015) translateY(1px);
+    transform: scale(1.008) translateY(-0.5px);
   }
 }

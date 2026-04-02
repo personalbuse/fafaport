@@ -100,15 +100,23 @@ const MagneticTitle = ({ text, className = "", vivid = false, colors = null, per
   }, [vivid, palette]);
 
   useEffect(() => {
+    let rafId;
     const maxScrollDistance = window.innerHeight * 0.5;
     
     const handleScroll = () => {
-      const progress = Math.min(window.scrollY / maxScrollDistance, 1);
-      setMorphProgress(progress);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        const progress = Math.min(window.scrollY / maxScrollDistance, 1);
+        setMorphProgress(progress);
+        rafId = null;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const renderChar = (char, wIdx, cIdx) => {
