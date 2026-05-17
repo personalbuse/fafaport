@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import MagneticTitle from './MagneticTitle';
+import BlueprintBackground from './BlueprintBackground';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,7 +59,10 @@ const Hero = () => {
       className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-cream"
       aria-label="Portafolio de Estefany Ladino - Arquitecta"
     >
-      <div className="text-center mb-12 pointer-events-none">
+      <div className="absolute inset-0 z-0">
+        <BlueprintBackground />
+      </div>
+      <div className="text-center mb-12 pointer-events-none relative z-10">
         <div ref={titleRef} className="title-animated will-change-transform">
           <MagneticTitle
             text="Estefany Ladino"
