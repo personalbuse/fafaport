@@ -3,6 +3,7 @@ import Hero from './components/Hero';
 import ProjectSlider from './components/ProjectSlider';
 import Process from './components/Process';
 import About from './components/About';
+import AboutDetail from './components/AboutDetail';
 import Footer from './components/Footer';
 import useLenis from './hooks/useLenis';
 
@@ -27,6 +28,7 @@ function App() {
         <ProjectSlider />
         <Process />
         <About />
+        <AboutDetail />
         <Footer />
       </div>
     </div>

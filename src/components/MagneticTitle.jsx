@@ -27,11 +27,16 @@ const MagneticTitle = ({ text, className = "", vivid = false, colors = null, per
   const containerRef = useRef(null);
   const [morphProgress, setMorphProgress] = useState(0);
   const palette = colors || VIVID_COLORS;
-  const [isAnimating, setIsAnimating] = useState(false);
+  const isAnimatingRef = useRef(false);
+  const rafRef = useRef(null);
+  const titleWrapperRef = useRef(null);
 
   useEffect(() => {
-    const letters = containerRef.current.querySelectorAll('.magnetic-letter');
-    const titleWrapper = containerRef.current.closest('.title-animated');
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const letters = container.querySelectorAll('.magnetic-letter');
+    titleWrapperRef.current = container.closest('.title-animated');
     
     if (vivid && persistent) {
       letters.forEach(el => {
@@ -45,71 +50,81 @@ const MagneticTitle = ({ text, className = "", vivid = false, colors = null, per
       });
     }
 
-    const onMouseMove = ({ clientX, clientY }) => {
-      const rect = containerRef.current.getBoundingClientRect();
-      const isNear = clientX >= rect.left - 50 && 
-                     clientX <= rect.right + 50 && 
-                     clientY >= rect.top - 50 && 
-                     clientY <= rect.bottom + 50;
+    const onMouseMove = (event) => {
+      if (rafRef.current) return;
+      
+      rafRef.current = requestAnimationFrame(() => {
+        const { clientX, clientY } = event;
+        const rect = container.getBoundingClientRect();
+        const isNear = clientX >= rect.left - 50 && 
+                       clientX <= rect.right + 50 && 
+                       clientY >= rect.top - 50 && 
+                       clientY <= rect.bottom + 50;
 
-      setIsAnimating(isNear);
-
-      if (titleWrapper) {
-        if (isNear) {
-          titleWrapper.classList.add('paused');
-        } else {
-          titleWrapper.classList.remove('paused');
-        }
-      }
-
-      letters.forEach(el => {
-        const { left, top, width, height } = el.getBoundingClientRect();
-        const dx = clientX - (left + width / 2);
-        const dy = clientY - (top + height / 2);
-        const dist = Math.hypot(dx, dy);
-        
-        const intensity = Math.max(0, (90 - dist) / 90);
-
-        if (intensity > 0) {
-          const xPercent = (-dx * intensity * 100) / width;
-          const yPercent = (-dy * intensity * 100) / height;
-          const scale = 1 + intensity * 0.2;
-
-          el.style.transform = `translate(${xPercent}%, ${yPercent}%) scale(${scale})`;
-          if (vivid) {
-            el.style.color = el.dataset.color;
-            el.style.textShadow = `0 4px 12px ${el.dataset.color}80`;
-          } else {
-            el.style.color = '#1A1A1A'; 
-          }
-        } else {
-          el.style.transform = '';
-          if (vivid && persistent) {
-            el.style.color = el.dataset.color;
-            el.style.textShadow = '';
-          } else {
-            el.style.color = '';
-            el.style.textShadow = '';
+        if (isAnimatingRef.current !== isNear) {
+          isAnimatingRef.current = isNear;
+          if (titleWrapperRef.current) {
+            titleWrapperRef.current.classList.toggle('paused', isNear);
           }
         }
+
+        letters.forEach(el => {
+          const { left, top, width, height } = el.getBoundingClientRect();
+          const dx = clientX - (left + width / 2);
+          const dy = clientY - (top + height / 2);
+          const dist = Math.hypot(dx, dy);
+          
+          const intensity = Math.max(0, (90 - dist) / 90);
+
+          if (intensity > 0) {
+            const xPercent = (-dx * intensity * 100) / width;
+            const yPercent = (-dy * intensity * 100) / height;
+            const scale = 1 + intensity * 0.2;
+
+            el.style.transform = `translate(${xPercent}%, ${yPercent}%) scale(${scale})`;
+            if (vivid) {
+              el.style.color = el.dataset.color;
+              el.style.textShadow = `0 4px 12px ${el.dataset.color}80`;
+            } else {
+              el.style.color = '#1A1A1A'; 
+            }
+          } else {
+            el.style.transform = '';
+            if (vivid && persistent) {
+              el.style.color = el.dataset.color;
+              el.style.textShadow = '';
+            } else {
+              el.style.color = '';
+              el.style.textShadow = '';
+            }
+          }
+        });
+
+        rafRef.current = null;
       });
     };
 
-    document.addEventListener('mousemove', onMouseMove);
-    return () => document.removeEventListener('mousemove', onMouseMove);
-  }, [vivid, palette]);
+    document.addEventListener('mousemove', onMouseMove, { passive: true });
+    return () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [vivid, palette, persistent]);
 
   useEffect(() => {
     let rafId;
-    const maxScrollDistance = window.innerHeight * 0.5;
+    let ticking = false;
+    const maxScrollDistance = typeof window !== 'undefined' ? window.innerHeight * 0.5 : 0;
     
     const handleScroll = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(() => {
-        const progress = Math.min(window.scrollY / maxScrollDistance, 1);
-        setMorphProgress(progress);
-        rafId = null;
-      });
+      if (!ticking) {
+        rafId = requestAnimationFrame(() => {
+          const progress = Math.min(window.scrollY / maxScrollDistance, 1);
+          setMorphProgress(progress);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });

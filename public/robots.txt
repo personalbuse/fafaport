@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://estefanyladino.com/sitemap.xml
