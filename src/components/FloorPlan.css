@@ -7,17 +7,13 @@
 
 .floor-plan-container {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.5);
-  width: 100%;
-  height: 100%;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.03; /* Reduced from 0.12 by approx 10% more */
+  opacity: 0.04;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
 }
 

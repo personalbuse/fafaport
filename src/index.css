@@ -6,16 +6,11 @@
 
 @layer base {
   body {
-    @apply bg-cream text-dark font-sans antialiased selection:bg-paleGreen selection:text-dark;
+    @apply bg-cream text-dark font-sans antialiased selection:bg-terracottaLight selection:text-dark;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-serif font-normal tracking-tight;
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-medium tracking-wide;
   }
 
   .font-syne {
@@ -23,33 +18,26 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-/* Hide scrollbar for cleaner look but keep functionality */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: theme("colors.cream");
+  background: #F9F6F0;
 }
 ::-webkit-scrollbar-thumb {
-  background: theme("colors.paleGreen");
+  background: #C8755D;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: theme("colors.darkGreen");
+  background: #2A3B32;
 }
 
-/* Marker Highlight Styles for Process Section */
 .marker-text {
   width: fit-content;
   padding: 6px 12px;
   position: relative;
   user-select: none;
   white-space: nowrap;
-  /* Font styling defined in React (Tailwind) */
 }
 
 .marker-text::before {
@@ -98,12 +86,11 @@ html {
   rotate: -0.5deg;
   scale: 1.1;
   transform: skew(-2deg);
-  --mark-color: 139 174 102; /* Match the nature green */
+  --mark-color: 139 174 102;
   --mark-bg-angle: 15deg;
   opacity: 0.8;
 }
 
-/* Palm Shadow Animations */
 .shadow-palm {
   opacity: 0;
   filter: blur(5px);
@@ -124,48 +111,23 @@ html {
 }
 
 @keyframes lazymove {
-  0% {
-    opacity: 0.15;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    opacity: 0.1;
-    transform: scale(1.1) rotate(3deg);
-  }
-  100% {
-    opacity: 0.15;
-    transform: scale(1) rotate(0deg);
-  }
+  0% { opacity: 0.15; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.1; transform: scale(1.1) rotate(3deg); }
+  100% { opacity: 0.15; transform: scale(1) rotate(0deg); }
 }
 
 @keyframes lazymove1 {
-  0% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-  50% {
-    opacity: 0.6;
-    transform: rotate(-3deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
+  0% { opacity: 1; transform: rotate(0deg); }
+  50% { opacity: 0.6; transform: rotate(-3deg); }
+  100% { opacity: 1; transform: rotate(0deg); }
 }
 
 @keyframes lazymove2 {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(3deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
 }
 
-/* Morph Letter Animation */
 .morph-letter {
   position: relative;
   display: inline-flex;
@@ -183,7 +145,6 @@ html {
   will-change: opacity;
 }
 
-/* Title Animation - Sutil latido con movimiento */
 .title-animated {
   animation: subtlePulseMove 6s ease-in-out infinite;
   display: inline-block;
@@ -195,10 +156,14 @@ html {
 }
 
 @keyframes subtlePulseMove {
-  0%, 100% {
-    transform: scale(1) translateY(0);
-  }
-  50% {
-    transform: scale(1.008) translateY(-0.5px);
+  0%, 100% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.008) translateY(-0.5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
