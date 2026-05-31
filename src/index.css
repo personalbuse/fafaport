@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400&family=Syne:wght@400;700;800&display=swap");
 
+@font-face {
+  font-family: 'Ambule';
+  src: url('/fonts/ambule.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +15,22 @@
 @layer base {
   body {
     @apply bg-cream text-dark font-sans antialiased selection:bg-terracottaLight selection:text-dark;
+  }
+
+  #root {
+    @apply bg-cream;
+  }
+
+  #root::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--bg-pattern);
+    background-repeat: repeat;
+    background-size: 2528px 1684px;
+    opacity: 1;
+    pointer-events: none;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -158,6 +182,121 @@
 @keyframes subtlePulseMove {
   0%, 100% { transform: scale(1) translateY(0); }
   50% { transform: scale(1.008) translateY(-0.5px); }
+}
+
+.scene {
+  width: 100%;
+  max-width: 1200px;
+  height: 700px;
+  perspective: 2200px;
+  margin: 0 auto;
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-500px);
+  animation: rotateCarousel 45s linear infinite;
+}
+
+.carousel.paused {
+  animation-play-state: paused;
+}
+
+@keyframes rotateCarousel {
+  0% { transform: translateZ(-500px) rotateY(0deg); }
+  100% { transform: translateZ(-500px) rotateY(360deg); }
+}
+
+.carousel-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.carousel-item:hover {
+  box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  cursor: zoom-out;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  cursor: default;
+}
+
+.modal-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.modal-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .scene {
+    max-width: 100%;
+    height: 400px;
+    perspective: 1200px;
+  }
+
+  .carousel {
+    transform: translateZ(-300px);
+  }
+
+  @keyframes rotateCarousel {
+    0% { transform: translateZ(-300px) rotateY(0deg); }
+    100% { transform: translateZ(-300px) rotateY(360deg); }
+  }
+
+  .carousel-item {
+    width: 280px;
+    height: 187px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

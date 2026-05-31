@@ -1,14 +1,22 @@
+import { useEffect } from 'react';
 import Hero from './components/Hero';
-import ProjectSlider from './components/ProjectSlider';
-import Process from './components/Process';
-import About from './components/About';
-import AboutDetail from './components/AboutDetail';
-import FloorPlan from './components/FloorPlan';
+import QuienSoy from './components/QuienSoy';
+import Herramientas from './components/Herramientas';
+import Proyectos from './components/Proyectos';
 import Footer from './components/Footer';
+import DownloadPdf from './components/DownloadPdf';
 import useLenis from './hooks/useLenis';
+import generateTile from './utils/generateTile';
 
 function App() {
   useLenis();
+
+  useEffect(() => {
+    generateTile('/background.png').then((dataUrl) => {
+      document.getElementById('root')?.style.setProperty('--bg-pattern', `url(${dataUrl})`);
+    });
+  }, []);
+
   return (
     <div className="bg-cream min-h-screen text-dark relative overflow-x-hidden">
       <svg width="0" height="0" className="hidden">
@@ -24,14 +32,11 @@ function App() {
 
       <div className="relative z-10">
         <Hero />
-        <ProjectSlider />
-        <Process />
-        <About />
-        <div className="relative">
-          <FloorPlan />
-          <AboutDetail />
-        </div>
+        <QuienSoy />
+        <Herramientas />
+        <Proyectos />
         <Footer />
+        <DownloadPdf />
       </div>
     </div>
   );
