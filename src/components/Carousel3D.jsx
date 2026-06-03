@@ -2,24 +2,49 @@ import { useRef, useEffect, useState } from 'react';
 
 const Carousel3D = ({
   images,
-  itemWidth = 540,
-  itemHeight = 360,
-  radius = 1500,
-  offsetZ = -500,
+  itemWidth: desktopWidth = 540,
+  itemHeight: desktopHeight = 360,
+  radius: desktopRadius = 1500,
+  offsetZ: desktopOffsetZ = -500,
 }) => {
   const carouselRef = useRef(null);
   const [expandedImg, setExpandedImg] = useState(null);
+  const animRef = useRef(null);
 
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel || !images.length) return;
 
+    const isMobile = window.innerWidth < 640;
+
+    const itemWidth = isMobile ? Math.round(desktopWidth * 0.45) : desktopWidth;
+    const itemHeight = isMobile ? Math.round(desktopHeight * 0.45) : desktopHeight;
+    const radius = isMobile ? Math.round(desktopRadius * 0.35) : desktopRadius;
+    const offsetZ = isMobile ? Math.round(desktopOffsetZ * 0.6) : desktopOffsetZ;
+
     carousel.innerHTML = '';
+
+    carousel.style.transform = '';
+    carousel.style.animation = '';
+
+    if (animRef.current) {
+      animRef.current.cancel();
+      animRef.current = null;
+    }
+
+    const anim = carousel.animate(
+      [
+        { transform: `translateZ(${offsetZ}px) rotateY(0deg)` },
+        { transform: `translateZ(${offsetZ}px) rotateY(360deg)` },
+      ],
+      { duration: 45000, iterations: Infinity, easing: 'linear' }
+    );
+    animRef.current = anim;
 
     const count = images.length;
 
     const handleClick = (src) => {
-      carousel.classList.add('paused');
+      anim.pause();
       setExpandedImg(src);
     };
 
@@ -37,13 +62,12 @@ const Carousel3D = ({
 
     return () => {
       carousel.innerHTML = '';
-      carousel.classList.remove('paused');
+      anim.cancel();
     };
-  }, [images]);
+  }, [images, desktopWidth, desktopHeight, desktopRadius, desktopOffsetZ]);
 
   const handleClose = () => {
-    const carousel = carouselRef.current;
-    if (carousel) carousel.classList.remove('paused');
+    if (animRef.current) animRef.current.play();
     setExpandedImg(null);
   };
 

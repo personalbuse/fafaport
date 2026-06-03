@@ -197,17 +197,6 @@
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transform: translateZ(-500px);
-  animation: rotateCarousel 45s linear infinite;
-}
-
-.carousel.paused {
-  animation-play-state: paused;
-}
-
-@keyframes rotateCarousel {
-  0% { transform: translateZ(-500px) rotateY(0deg); }
-  100% { transform: translateZ(-500px) rotateY(360deg); }
 }
 
 .carousel-item {
@@ -280,22 +269,8 @@
 @media (max-width: 640px) {
   .scene {
     max-width: 100%;
-    height: 400px;
-    perspective: 1200px;
-  }
-
-  .carousel {
-    transform: translateZ(-300px);
-  }
-
-  @keyframes rotateCarousel {
-    0% { transform: translateZ(-300px) rotateY(0deg); }
-    100% { transform: translateZ(-300px) rotateY(360deg); }
-  }
-
-  .carousel-item {
-    width: 280px;
-    height: 187px;
+    height: 380px;
+    perspective: 1000px;
   }
 }
 

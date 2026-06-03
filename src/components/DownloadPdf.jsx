@@ -16,7 +16,6 @@ const DownloadPdf = () => {
     const pageHeight = 297;
     const margin = 15;
     const contentWidth = pageWidth - margin * 2;
-    const pagePx = Math.round(pageHeight * pxPerMm);
     const marginPx = Math.round(margin * pxPerMm);
 
     const container = document.createElement('div');
@@ -75,35 +74,40 @@ const DownloadPdf = () => {
 
     await new Promise((r) => setTimeout(r, 500));
 
-    const totalHeight = container.scrollHeight;
-    let yOffset = 0;
-    let pageNum = 1;
-
     try {
-      while (yOffset < totalHeight) {
-        const viewHeight = Math.min(pagePx, totalHeight - yOffset);
+      const canvas = await html2canvas(container, {
+        width: 800,
+        height: container.scrollHeight,
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#F9F6F0',
+        logging: false,
+      });
 
-        const canvas = await html2canvas(container, {
-          width: 800,
-          height: viewHeight,
-          y: yOffset,
-          scale: 2,
-          useCORS: true,
-          allowTaint: true,
-          backgroundColor: '#F9F6F0',
-          logging: false,
-        });
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      const imgWidthMm = contentWidth;
+      const imgHeightMm = (canvas.height * imgWidthMm) / canvas.width;
 
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
-        const imgH = (canvas.height * contentWidth) / canvas.width;
+      const contentHeight = pageHeight - margin * 2;
+      let yOffset = 0;
+      let pageNum = 1;
 
+      while (yOffset < imgHeightMm) {
         if (pageNum > 1) pdf.addPage();
-        pdf.addImage(imgData, 'JPEG', 0, 0, pageWidth, pageHeight);
+
+        pdf.addImage(imgData, 'JPEG', margin, margin - yOffset, imgWidthMm, imgHeightMm);
+
+        pdf.setFillColor(249, 246, 240);
+        pdf.rect(0, 0, pageWidth, margin, 'F');
+        pdf.rect(0, pageHeight - margin, pageWidth, margin, 'F');
+
+        pdf.setPage(pageNum);
         pdf.setFontSize(9);
         pdf.setTextColor(150);
         pdf.text(`${pageNum}`, pageWidth / 2, pageHeight - 7, { align: 'center' });
 
-        yOffset += viewHeight;
+        yOffset += contentHeight;
         pageNum++;
       }
 
