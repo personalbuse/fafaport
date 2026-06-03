@@ -34,6 +34,48 @@ const projects = [
       offsetZ: -400,
     },
   },
+  {
+    id: 3,
+    title: "PERFILES VIALES URBANOS – CHINACOTA",
+    description:
+      "Levantamiento y analisis de perfiles viales urbanos en el municipio de Chinacota, Norte de Santander. El proyecto documento las condiciones actuales de las secciones viales, el perfil urbano, el arbolado, el mobiliario y las fachadas, con el fin de identificar las caracteristicas morfologicas del espacio publico lineal y proponer lineamientos para su mejoramiento integral.",
+    images: [
+      "https://i.imgur.com/VaEA6Az.jpeg",
+      "https://i.imgur.com/a30kzHB.jpeg",
+      "https://i.imgur.com/gdpUB5O.jpeg",
+      "https://i.imgur.com/BHHZLPN.jpeg",
+      "https://i.imgur.com/4LOWsSl.jpeg",
+      "https://i.imgur.com/bXlvOzJ.jpeg",
+      "https://i.imgur.com/YDF74LO.jpeg",
+      "https://i.imgur.com/mgsJoz5.jpeg",
+      "https://i.imgur.com/FJEEg4P.jpeg",
+      "https://i.imgur.com/YRqUirX.jpeg",
+      "https://i.imgur.com/CwrT62K.jpeg",
+      "https://i.imgur.com/MFvcTMS.jpeg",
+    ],
+    carouselOptions: {
+      itemWidth: 300,
+      itemHeight: 450,
+      radius: 1400,
+      offsetZ: -500,
+    },
+  },
+  {
+    id: 4,
+    title: "CARACTERIZACION DE ANDENES – CENTRO HISTORICO DE CHINACOTA",
+    description:
+      "Caracterizacion detallada de los andenes del centro historico de Chinacota, evaluando materiales, dimensiones, estado de conservacion y condiciones de accesibilidad. El estudio incluyo levantamiento fotografico, fichas tecnicas por tramo y cartografia tematica, proporcionando una base diagnostica para la formulacion de proyectos de intervencion en el espacio publico patrimonial.",
+    images: [
+      "https://i.imgur.com/6HQHQFt.jpeg",
+      "https://i.imgur.com/6P09oty.jpeg",
+    ],
+    carouselOptions: {
+      itemWidth: 680,
+      itemHeight: 460,
+      radius: 900,
+      offsetZ: -400,
+    },
+  },
 ];
 
 export default projects;

@@ -69,7 +69,7 @@ const Herramientas = () => {
             <div
               key={cat.name}
               ref={(el) => cardsRef.current[i] = el}
-              className="w-full max-w-xs"
+              className="w-full max-w-xs md:max-w-none"
             >
               <h3 className="text-lg md:text-xl font-sans font-medium uppercase tracking-[0.15em] text-dark mb-6 pb-3 border-b border-dark/10 text-center">
                 {cat.name}

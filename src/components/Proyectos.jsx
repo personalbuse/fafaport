@@ -40,7 +40,7 @@ const Proyectos = () => {
         </div>
 
         {projects.map((project) => (
-          <div key={project.id} className="mb-32 last:mb-0">
+          <div key={project.id} className="mb-16 md:mb-32 last:mb-0">
             <div className="text-center mb-10">
               <h3 className="text-2xl md:text-4xl font-ambule text-dark uppercase tracking-[0.05em] leading-[1.1] mb-6 max-w-4xl mx-auto">
                 {project.title}
@@ -54,13 +54,15 @@ const Proyectos = () => {
             </div>
 
             {project.images && project.images.length > 0 && (
-              <Carousel3D
-                images={project.images}
-                itemWidth={project.carouselOptions?.itemWidth}
-                itemHeight={project.carouselOptions?.itemHeight}
-                radius={project.carouselOptions?.radius}
-                offsetZ={project.carouselOptions?.offsetZ}
-              />
+              <div className={project.id === 3 ? 'mt-12 md:mt-16' : ''}>
+                <Carousel3D
+                  images={project.images}
+                  itemWidth={project.carouselOptions?.itemWidth}
+                  itemHeight={project.carouselOptions?.itemHeight}
+                  radius={project.carouselOptions?.radius}
+                  offsetZ={project.carouselOptions?.offsetZ}
+                />
+              </div>
             )}
           </div>
         ))}

@@ -67,7 +67,7 @@ const Hero = () => {
             persistent={false}
           />
         </div>
-        <p ref={subtitleRef} className="text-xl md:text-2.5xl font-sans font-medium tracking-[0.2em] uppercase text-dark/40 mt-6 md:mt-10">
+        <p ref={subtitleRef} className="text-xl md:text-3xl font-sans font-medium tracking-[0.2em] uppercase text-dark/40 mt-6 md:mt-10">
           Arquitecta
         </p>
       </div>

@@ -51,7 +51,7 @@ const QuienSoy = () => {
             <h2 className="text-2xl md:text-4xl font-sans font-medium uppercase tracking-[0.2em] text-dark">
               Arquitecta
             </h2>
-            <p className="mt-4 text-sm md:text-base font-sans text-dark/50 tracking-wider break-all">
+            <p className="mt-4 text-sm md:text-base font-sans text-dark/50 tracking-wider break-words">
               estefany.ladinoest@unipamplona.edu.co
             </p>
           </div>
