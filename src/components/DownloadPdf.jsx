@@ -47,15 +47,15 @@ const DownloadPdf = () => {
     try {
       const pdf = new jsPDF('p', 'mm', 'a4');
 
-      const addNewPage = (w, h) => {
-        pdf.addPage([w, h]);
+      const addNewPage = (w, h, orient) => {
+        pdf.addPage('a4', orient === 'landscape' ? 'l' : 'p');
         pageSizes.push({ w, h });
         y = MARGIN;
       };
 
       const checkSpace = (needed) => {
         const { h } = pageSizes[pageSizes.length - 1];
-        if (y + needed > MARGIN + (h - MARGIN * 2)) addNewPage(P, L);
+        if (y + needed > MARGIN + (h - MARGIN * 2)) addNewPage(P, L, 'p');
       };
 
       checkSpace(40);
@@ -73,6 +73,12 @@ const DownloadPdf = () => {
 
       pdf.setFontSize(13);
       pdf.text('estefany.ladinoest@unipamplona.edu.co', P / 2, y, { align: 'center' });
+      y += 9;
+
+      pdf.setFontSize(13);
+      pdf.setTextColor(70, 130, 200);
+      pdf.text('estefanyladino.vercel.app', P / 2, y, { align: 'center' });
+      pdf.setTextColor(26, 26, 26);
       y += 16;
 
       pdf.setDrawColor(220);
@@ -138,7 +144,7 @@ const DownloadPdf = () => {
       for (const p of projects) {
         const imgs = preloaded.find((x) => x.id === p.id).images.filter(Boolean);
 
-        addNewPage(P, L);
+        addNewPage(P, L, 'p');
 
         const cw = P - MARGIN * 2;
 
@@ -173,7 +179,7 @@ const DownloadPdf = () => {
           const pw = orient === 'landscape' ? L : P;
           const ph = orient === 'landscape' ? P : L;
 
-          addNewPage(pw, ph);
+          addNewPage(pw, ph, orient);
 
           const areaW = pw - MARGIN * 2;
           const areaH = ph - MARGIN * 2;
