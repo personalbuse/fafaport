@@ -14,6 +14,7 @@ const projects = [
       "https://i.imgur.com/3VhGoLP.png",
       "https://i.imgur.com/IV2u8ie.png",
     ],
+    portrait: true,
   },
   {
     id: 2,
@@ -69,6 +70,7 @@ const projects = [
       "https://i.imgur.com/6HQHQFt.jpeg",
       "https://i.imgur.com/6P09oty.jpeg",
     ],
+    portrait: true,
     carouselOptions: {
       itemWidth: 680,
       itemHeight: 460,
